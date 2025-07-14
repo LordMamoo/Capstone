@@ -1,29 +1,24 @@
-import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './pages/login.jsx';
+import Admin from './pages/admin.jsx';
+import Profile from './pages/profile.jsx';
+import Register from './pages/registration.jsx';
+import Course from './pages/courses.jsx';
+import Navbar from './components/navbar.jsx';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
-
-
   return (
-    <>
-      <h1>Student Register</h1>
-      <h2>Login</h2>
-      <form action="">
-        <input type="text" placeholder='Username'/>
-        <input type="text" placeholder='Password'/>
-        <button>Submit</button>
-      </form>
-      <div className="card">
-      </div>
-    </>
-  )
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Login />} />
+        <Route path='/admin' element={<Admin />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/courses' element={<Profile />} />
+        <Route path='/profile' element={<Course />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
